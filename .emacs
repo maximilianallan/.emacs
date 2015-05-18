@@ -58,7 +58,10 @@
 ;;;(setq indent-line-function 'insert-tab)
 
 ;;set the auto-fill column
-(setq-default fill-column 70)
+(auto-fill-mode -1)
+(remove-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;;(setq-default fill-column 70)
 
 ;;to set background color to black
 (set-background-color "black")
