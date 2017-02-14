@@ -4,7 +4,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(display-time-mode t)
- '(ede-project-directories (quote ("/home/max/Documents/projects/2012/tool_tracking/surgical_tool_tracking/source")))
  '(inhibit-startup-screen t)
  '(show-paren-mode t)
  '(transient-mark-mode t))
@@ -45,6 +44,8 @@
 ;(add-hook 'c-mode-hook 'turn-on-font-lock)
 ;(add-hook 'c++-mode-hook 'turn-on-font-lock)
 
+(setq vc-follow-symlinks 't)
+
 (defun toggle-fullscreen ()
   (interactive)
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
@@ -54,7 +55,7 @@
 )
 ;; insert spaces instead of tabs
 (setq-default indent-tabs-mode nil)
-(setq-default tab-width 2)
+(setq-default tab-width 4)
 ;;;(setq indent-line-function 'insert-tab)
 
 ;;set the auto-fill column
@@ -71,9 +72,6 @@
 
 ;;to display time
 (display-time)
-
-;;to set foreground color to white
-(set-foreground-color "white")
 
 (autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
 (add-to-list
@@ -99,6 +97,10 @@
   (aset buffer-display-table ?\^M []))
 
 
+;; set the fonts and colors I like
+(global-font-lock-mode t)
+(load-file "~/.emacs.d/aanila-theme-source-code.el")
+
 ;;set cursor colours
 
 (setq hcz-set-cursor-color-color "")
@@ -116,6 +118,21 @@
       (set-cursor-color (setq hcz-set-cursor-color-color color))
       (setq hcz-set-cursor-color-buffer (buffer-name)))))
 (add-hook 'post-command-hook 'hcz-set-cursor-color-according-to-mode)
+
+
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+  backup-by-copying t    ; Don't delink hardlinks
+  version-control t      ; Use version numbers on backups
+  delete-old-versions t  ; Automatically delete excess backups
+  kept-new-versions 20   ; how many of the newest versions to keep
+  kept-old-versions 5    ; and how many of the old
+  )
+
+;; enable l.h.s line numbers
+(global-linum-mode t)
+
+;; enable horizontal split
+(setq split-width-threshold 1)
 
 
 ;;load the cedet initialisation file
